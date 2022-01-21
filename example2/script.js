@@ -6,6 +6,7 @@ import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.124.0/examp
 // declare variables to store scene, camera, and renderer
 let scene, camera, renderer
 const model = 'Rhino_Logo.3dm'
+// insert your file here: const model = 'Rhino_Logo.3dm'
 
 // call functions
 init()
