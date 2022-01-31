@@ -16,9 +16,9 @@ function init() {
 
     // create a scene and a camera
     scene = new THREE.Scene()
-    scene.background = new THREE.Color(1,1,1)
+    scene.background = new THREE.Color('#FFF0F5')
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 )
-    camera.position.y = - 100
+    camera.position.y = - 200
 
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer( { antialias: true } )
@@ -27,11 +27,18 @@ function init() {
 
     const controls = new OrbitControls( camera, renderer.domElement )
 
-    const directionalLight = new THREE.DirectionalLight( 0xffffff )
-    directionalLight.position.set( 0, 0, 2 )
-    directionalLight.castShadow = true
-    directionalLight.intensity = 2
-    scene.add( directionalLight )
+    const directionalLight1 = new THREE.DirectionalLight( '0xffffff' )
+    directionalLight1.position.set( 0, 0, 2 )
+    directionalLight1.castShadow = false
+    directionalLight1.intensity = 10
+    scene.add( directionalLight1 )
+
+
+    const directionalLight2 = new THREE.DirectionalLight( '0xffffff' )
+    directionalLight2.position.set( 0, 0, -20 )
+    directionalLight2.castShadow = false
+    directionalLight2.intensity = 5
+    scene.add( directionalLight2 )
 
     raycaster = new THREE.Raycaster()
 
@@ -47,6 +54,7 @@ function init() {
     } )
 
 }
+
 
 function onClick( event ) {
 
@@ -69,7 +77,7 @@ function onClick( event ) {
     // reset object colours
     scene.traverse((child, i) => {
         if (child.isMesh) {
-            child.material.color.set( 'white' )
+            child.material.color.set('#00FFFF')
         }
     });
 
@@ -79,7 +87,7 @@ function onClick( event ) {
         const object = intersects[0].object
         console.log(object) // debug
 
-        object.material.color.set( 'yellow' )
+        object.material.color.set( 'white' )
 
         // get user strings
         let data, count
@@ -117,7 +125,15 @@ function onClick( event ) {
 function animate() {
 
     requestAnimationFrame( animate )
+    scene.traverse(function(child){
+        if (child.isMesh){
+            child.rotation.y +=0.001
+            child.rotation.x +=0.001
+            child.rotation.z +=0.001
+        }else{
+        }})
     renderer.render( scene, camera )
 
 }
 
+animate()
