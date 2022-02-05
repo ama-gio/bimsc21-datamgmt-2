@@ -32,3 +32,7 @@ a:hover{
 .heading-10{
     font-size: 30pt;
 }
+
+img {
+    width: 512px; /* set image width */
+}
